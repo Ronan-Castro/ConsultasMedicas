@@ -1,4 +1,4 @@
-﻿using ConsultaMedica.Models;
+﻿using ModelosConsultaMedica.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

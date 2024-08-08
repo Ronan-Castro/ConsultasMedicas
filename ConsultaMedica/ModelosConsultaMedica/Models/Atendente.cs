@@ -1,6 +1,6 @@
-﻿using ConsultaMedica.Data;
+﻿using ModelosConsultaMedica.Data;
 
-namespace ConsultaMedica.Models
+namespace ModelosConsultaMedica.Models
 {
     public class Atendente : ApplicationUser
     {

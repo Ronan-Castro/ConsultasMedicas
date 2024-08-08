@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsultaMedica", "ConsultaM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsultaMedica.Client", "ConsultaMedica\ConsultaMedica.Client\ConsultaMedica.Client.csproj", "{C2B8230C-18D6-456D-AE85-CDDB536C5275}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelosConsultaMedica", "ModelosConsultaMedica\ModelosConsultaMedica.csproj", "{7764E568-F488-4334-BACD-F1A44CCADC63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C2B8230C-18D6-456D-AE85-CDDB536C5275}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2B8230C-18D6-456D-AE85-CDDB536C5275}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2B8230C-18D6-456D-AE85-CDDB536C5275}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7764E568-F488-4334-BACD-F1A44CCADC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7764E568-F488-4334-BACD-F1A44CCADC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7764E568-F488-4334-BACD-F1A44CCADC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7764E568-F488-4334-BACD-F1A44CCADC63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

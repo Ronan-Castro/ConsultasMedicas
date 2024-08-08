@@ -1,4 +1,4 @@
-﻿namespace ConsultaMedica.Models
+﻿namespace ModelosConsultaMedica.Models
 {
     public class Agendamento
     {

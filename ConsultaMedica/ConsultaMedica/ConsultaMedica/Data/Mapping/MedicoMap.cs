@@ -1,4 +1,4 @@
-﻿using ConsultaMedica.Models;
+﻿using ModelosConsultaMedica.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
