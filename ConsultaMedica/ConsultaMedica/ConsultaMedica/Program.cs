@@ -11,6 +11,10 @@ using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+
 // Add MudBlazor services
 builder.Services.AddMudServices();
 
@@ -50,6 +54,15 @@ builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSe
 
 var app = builder.Build();
 
+/*
+using (var scope = app.Services.CreateScope())
+{
+    var dbcontext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbcontext.Database.EnsureCreated();
+}
+*/
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -75,5 +88,7 @@ app.MapRazorComponents<App>()
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
+
+app.MapControllers();
 
 app.Run();

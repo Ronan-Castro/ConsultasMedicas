@@ -1,33 +1,32 @@
-﻿@page "/pacientes/criar"
+﻿@page "/pacientes/editar"
 @using ConsultaMedica.Client.Extensions
 @inject IPacienteRepository repository
 
-<MudText Typo="Typo.h3">Cadastro de Pacientes</MudText>
+
+<MudText Typo="Typo.h3"> de Pacientes</MudText>
 
 <MudPaper Class="pa-8 mt-4">
-    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync" OnInvalidSubmit="OnInvalidSubmitAsync">
-        <DataAnnotationsValidator/>
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator />
 
-        <MudTextField Label="Nome" Variant="Variant.Outlined" HelperText="Campo obrigatório" @bind-Value="InputModel.Nome" For="@(()=>InputModel.Nome)"/>
-        <MudTextField Label="Documento" Variant="Variant.Outlined" HelperText="Campo obrigatório" @bind-Value="InputModel.Documento" For="@(()=>InputModel.Documento)" Mask="@(new PatternMask("000.000.000-00"))"/>
+        <MudTextField Label="Nome" Variant="Variant.Outlined" HelperText="Campo obrigatório" @bind-Value="InputModel.Nome" For="@(()=>InputModel.Nome)" />
+        <MudTextField Label="Documento" Variant="Variant.Outlined" HelperText="Campo obrigatório" @bind-Value="InputModel.Documento" For="@(()=>InputModel.Documento)" Mask="@(new PatternMask("000.000.000-00"))" />
         <MudTextField Label="Celular" Variant="Variant.Outlined" HelperText="Campo obrigatório" @bind-Value="InputModel.Celular" For="@(()=>InputModel.Celular)" Mask="@(new PatternMask("(00) 0 0000-0000"))" />
+
+        <MudDatePicker Label="Data de Nascimento"
+                       Editable="true"
+                       @bind-Date="DataNascimento"
+                       Variant="Variant.Outlined"
+                       MaxDate="@MaxDate"
+                       Placeholder="Data de Nascimento" />
 
         <MudTextField Label="E-mail"
                       Variant="Variant.Outlined"
                       HelperText="Campo obrigatório"
                       @bind-Value="InputModel.Email"
                       For="@(()=> InputModel.Email)" />
-        
-        <MudDatePicker Label="Data de Nascimento"
-                       Editable="true"
-                       @bind-Date="DataNascimento"
-                       Variant="Variant.Outlined"
-                       MaxDate="@MaxDate"
-                       Placeholder="Data de Nascimento" 
-                       Mask="@(new PatternMask("00/00/0000"))"/>
 
-
-        <MudDivider Class="mt-4"/>
+        <MudDivider Class="mt-4" />
         <MudButton Variant="Variant.Filled"
                    StartIcon="@Icons.Material.Filled.Save"
                    Color="Color.Info"
@@ -60,7 +59,7 @@
                         DataNascimento = DataNascimento.Value
                     };
 
-                await repository.AddAsync(paciente);
+                await repository.UpdateAsync(paciente);
                 Snackbar.Add("Paciente cadastrado com sucesso!", Severity.Success);
                 NavigationManager.NavigateTo("/pacientes");
             }
@@ -69,11 +68,5 @@
         {
             Snackbar.Add(ex.Message, Severity.Error);
         }
-    }
-
-    public async Task OnInvalidSubmitAsync(EditContext editContext)
-    {
-        Snackbar.Add("Não foi possível enviar, confira as informações.", Severity.Error);
-        
     }
 }

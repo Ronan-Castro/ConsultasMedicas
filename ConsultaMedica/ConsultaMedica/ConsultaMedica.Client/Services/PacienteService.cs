@@ -43,11 +43,10 @@ public class PacienteService : IPacienteRepository
         return response!;
     }
 
-
     async Task IPacienteRepository.AddAsync(Paciente paciente)
     {
         var produto = await httpClient
-            .PostAsJsonAsync("api/Paciente/Add-Paciente", paciente);
+            .PostAsJsonAsync("api/Paciente", paciente);
         await produto.Content.ReadFromJsonAsync<Paciente>();        
     }
 
