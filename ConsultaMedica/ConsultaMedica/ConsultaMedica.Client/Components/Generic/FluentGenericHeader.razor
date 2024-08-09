@@ -1,15 +1,11 @@
-﻿<!-- FluentGenericHeader.razor -->
- <FluentHeader style="background-color: #3498db; color: #ffffff; border-radius: 15px 15px 0 0;">
-    <FluentStack HorizontalAlignment="HorizontalAlignment.Start">
+﻿<MudPaper Elevation="25">
+    <MudToolBar >
         @Title
-    </FluentStack>
-
-    <FluentStack HorizontalAlignment="HorizontalAlignment.End">
         <ButtonAddGeneric Href="@Href">
             @ButtonText
         </ButtonAddGeneric>
-    </FluentStack>
-</FluentHeader> 
+    </MudToolBar>
+</MudPaper>
 
 
 @code {

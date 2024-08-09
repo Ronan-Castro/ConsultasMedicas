@@ -1,8 +1,7 @@
-﻿<FluentStack HorizontalAlignment="HorizontalAlignment.End">
-    <FluentAnchor Href="@Href" IconStart="@(new Icons.Regular.Size24.NoteAdd().WithColor(Color.Success))">
-        @ChildContent
-    </FluentAnchor>
-</FluentStack>
+﻿<MudFab Href="@Href" StartIcon="@Icons.Material.Filled.Add" Color="Color.Tertiary" ClickPropagation="true">
+    @ChildContent
+</MudFab>
+
 
 @code {
     [Parameter]

@@ -1,9 +1,8 @@
 ﻿@inherits Microsoft.AspNetCore.Components.ComponentBase
 
-
-<FluentButton Appearance="Appearance.Outline" @onclick="HandleEditClick">
+<MudButton Appearance="Appearance.Outline" @onclick="HandleEditClick">
     <FluentIcon Icon="Icons.Regular.Size24.Edit" Color="Color.Success" />
-</FluentButton>
+</MudButton>
 
 @code {
     [Parameter] public EventCallback OnEditClick { get; set; }
@@ -19,7 +18,7 @@
         // Redirecionar para o caminho específico
         if (!string.IsNullOrEmpty(NavigationPath))
         {
-            _navigation.NavigateTo(NavigationPath);
+            NavigationManager.NavigateTo(NavigationPath);
         }
     }
 }

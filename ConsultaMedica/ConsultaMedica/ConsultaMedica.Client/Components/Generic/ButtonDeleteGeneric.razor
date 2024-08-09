@@ -1,13 +1,14 @@
 ﻿@inherits Microsoft.AspNetCore.Components.ComponentBase
 
 <MudButton Appearance="Appearance.Outline" OnClick="ShowConfirmationDialog">
-    <MudIcon Icon="Icons.Regular.Size24.Delete" Color="Color.Error" />
+    <MudIcon Icon="Icons.Regular.Size24.Delete" Color="MudBlazor.Color.Error" />
 </MudButton>
 
 @code {
     [Parameter] public EventCallback<int> OnConfirmation { get; set; }
     [Parameter] public string ConfirmationMessage { get; set; }
     [Parameter] public string Title { get; set; }
+    [Parameter] public string mensagemSnackBar { get; set; } = "Operação Cancelada";
 
     private async Task ShowConfirmationDialog()
     {
@@ -25,7 +26,7 @@
         }
         else
         {
-            ToastService.ShowInfo($"Operação cancelada");
+            Snackbar.Add(mensagemSnackBar);
         }
     }
 }
