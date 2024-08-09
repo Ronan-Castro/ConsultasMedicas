@@ -1,6 +1,6 @@
 ﻿using ModelosConsultaMedica.Models;
 
-namespace ProConsulta.Repositories.Medicos
+namespace ModelosConsultaMedica.Interfaces
 {
     public interface IMedicoRepository
     {

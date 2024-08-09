@@ -1,0 +1,34 @@
+﻿@page "/pacientes"
+@inject IPacienteRepository repository
+
+<FluentGenericHeader Href="pacientes/criar" Title="Pacientes"/>
+<MudDataGrid Items="@Pacientes" Filterable="false" SortMode="@SortMode.Single" Groupable="false">
+    <Columns>
+        <PropertyColumn Property="x=>x.Nome"/>
+        <PropertyColumn Property="x=>x.Documento"/>
+        <PropertyColumn Property="x=>x.Email"/>
+        <PropertyColumn Property="x=>x.Celular"/>
+        <PropertyColumn Property="x=>x.DataNascimento" Format="dd/MM/yyyy"/>
+        <TemplateColumn>
+            <CellTemplate>
+                <MudStack Row>
+                    <ButtonEditGeneric OnEditClick="@(()=>GoUpdate(context.Item.Id))"/>
+                    <ButtonDeleteGeneric ConfirmationMessage="Deseja Remover o Paciente?<br>Esta ação não tem volta!" Title="Remover Paciente" OnConfirmation="@(()=>GoUpdate(context.Item.Id))" />
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+</MudDataGrid>
+@code {
+    private List<Paciente> Pacientes { get; set; } = new List<Paciente>();
+
+    public void GoUpdate(int id)
+    {
+
+    }
+
+    public void Delete(int id)
+    {
+
+    }
+}

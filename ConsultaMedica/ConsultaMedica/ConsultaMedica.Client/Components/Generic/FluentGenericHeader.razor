@@ -1,15 +1,12 @@
-﻿<MudPaper Elevation="25">
-    <MudToolBar >
-        @Title
-        <ButtonAddGeneric Href="@Href">
-            @ButtonText
-        </ButtonAddGeneric>
+﻿<MudPaper Elevation="25" Width="100%">
+    <MudToolBar Class="justify-space-between rounded-t-xl" Style="background-color:rgba(119,107,231,1);">
+        <MudText Typo="Typo.h3" Style="color:var(--mud-palette-white)">@Title</MudText>
+        <ButtonAddGeneric Href="@Href"/>
     </MudToolBar>
 </MudPaper>
 
 
 @code {
     [Parameter] public string Title { get; set; }
-    [Parameter] public string ButtonText { get; set; }
     [Parameter] public string Href { get; set; }
 }

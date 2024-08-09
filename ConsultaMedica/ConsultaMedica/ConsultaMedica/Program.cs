@@ -2,9 +2,11 @@ using ConsultaMedica.Client.Pages;
 using ConsultaMedica.Components;
 using ConsultaMedica.Components.Account;
 using ConsultaMedica.Data;
+using ConsultaMedica.Repositories.Pacientes;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ModelosConsultaMedica.Interfaces;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +23,9 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
+
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+
 
 builder.Services.AddAuthentication(options =>
     {

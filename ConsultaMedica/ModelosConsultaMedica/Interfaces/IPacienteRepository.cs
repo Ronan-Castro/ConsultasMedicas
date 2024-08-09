@@ -1,6 +1,6 @@
 ﻿using ModelosConsultaMedica.Models;
 
-namespace ConsultaMedica.Repositories.Pacientes
+namespace ModelosConsultaMedica.Interfaces
 {
     public interface IPacienteRepository
     {

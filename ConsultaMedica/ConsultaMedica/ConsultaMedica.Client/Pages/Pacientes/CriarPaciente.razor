@@ -1,0 +1,68 @@
+﻿@page "/pacientes/criar"
+@using ConsultaMedica.Client.Extensions
+@inject IPacienteRepository repository
+
+<h3>CriarPaciente</h3>
+
+<MudText Typo="Typo.h3">Cadastro de Pacientes</MudText>
+
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+        <DataAnnotationsValidator/>
+
+        <MudTextField Label="Nome" Variant="Variant.Outlined" HelperText="Campo obrigatório" @bind-Value="InputModel.Nome" For="@(()=>InputModel.Nome)"/>
+        <MudTextField Label="Documento" Variant="Variant.Outlined" HelperText="Campo obrigatório" @bind-Value="InputModel.Documento" For="@(()=>InputModel.Documento)" Mask="@(new PatternMask("000.000.000-00"))"/>
+        <MudTextField Label="Celular" Variant="Variant.Outlined" HelperText="Campo obrigatório" @bind-Value="InputModel.Celular" For="@(()=>InputModel.Celular)" Mask="@(new PatternMask("(00) 0 0000-0000"))" />
+        
+        <MudDatePicker Label="Data de Nascimento"
+                       Editable="false"
+                       @bind-Date="DataNascimento"
+                       Variant="Variant.Outlined"
+                       MaxDate="@MaxDate"
+                       Placeholder="Data de Nascimento" />
+
+        <MudDivider Class="mt-4"/>
+
+        <MudButton Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.Save"
+                   Color="Color.Info"
+                   Size="Size.Large"
+                   ButtonType="ButtonType.Submit"
+                   Class="mt-4">
+            SALVAR
+        </MudButton>
+
+    </EditForm>
+</MudPaper>
+
+@code {
+    public DateTime? DataNascimento { get; set; } = DateTime.Today;
+    public DateTime? MaxDate { get; set; } = DateTime.Today;
+    private PacienteInputModel InputModel { get; set; } = new();
+
+    public async Task OnValidSubmitAsync(EditContext editContext)
+    {
+        try
+        {
+            if (editContext.Model is PacienteInputModel model)
+            {
+                var paciente = new Paciente
+                    {
+                        Nome = model.Nome,
+                        Documento = model.Documento.SomenteCaracteres(),
+                        Celular = model.Celular.SomenteCaracteres(),
+                        Email = model.Email,
+                        DataNascimento = DataNascimento.Value
+                    };
+
+                await repository.AddAsync(paciente);
+                Snackbar.Add("Paciente cadastrado com sucesso!", Severity.Success);
+                NavigationManager.NavigateTo("/pacientes");
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
+    }
+}

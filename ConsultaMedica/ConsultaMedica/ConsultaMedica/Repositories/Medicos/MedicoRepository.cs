@@ -1,6 +1,7 @@
 ﻿using ConsultaMedica.Data;
 using ModelosConsultaMedica.Models;
 using Microsoft.EntityFrameworkCore;
+using ModelosConsultaMedica.Interfaces;
 
 namespace ProConsulta.Repositories.Medicos
 {

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsultaMedica", "ConsultaMedica\ConsultaMedica\ConsultaMedica.csproj", "{B5452A1E-E6F0-4F52-A526-BD66F1D8B132}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsultaMedica", "ConsultaMedica\ConsultaMedica\ConsultaMedica.csproj", "{B5452A1E-E6F0-4F52-A526-BD66F1D8B132}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsultaMedica.Client", "ConsultaMedica\ConsultaMedica.Client\ConsultaMedica.Client.csproj", "{C2B8230C-18D6-456D-AE85-CDDB536C5275}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsultaMedica.Client", "ConsultaMedica\ConsultaMedica.Client\ConsultaMedica.Client.csproj", "{C2B8230C-18D6-456D-AE85-CDDB536C5275}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelosConsultaMedica", "ModelosConsultaMedica\ModelosConsultaMedica.csproj", "{7764E568-F488-4334-BACD-F1A44CCADC63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelosConsultaMedica", "ModelosConsultaMedica\ModelosConsultaMedica.csproj", "{7764E568-F488-4334-BACD-F1A44CCADC63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

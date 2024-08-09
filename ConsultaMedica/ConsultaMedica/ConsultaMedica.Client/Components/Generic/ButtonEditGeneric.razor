@@ -1,12 +1,12 @@
 ﻿@inherits Microsoft.AspNetCore.Components.ComponentBase
 
-<MudButton Appearance="Appearance.Outline" @onclick="HandleEditClick">
-    <FluentIcon Icon="Icons.Regular.Size24.Edit" Color="Color.Success" />
-</MudButton>
+<MudFab Size="@Size" StartIcon="@Icon" @onclick="HandleEditClick" Color="MudBlazor.Color.Secondary" />
 
 @code {
     [Parameter] public EventCallback OnEditClick { get; set; }
     [Parameter] public string? NavigationPath { get; set; }
+    [Parameter] public Size Size { get; set; } = Size.Small;
+    [Parameter] public string Icon { get; set; } = @Icons.Material.Filled.Edit;
 
     private async Task HandleEditClick()
     {

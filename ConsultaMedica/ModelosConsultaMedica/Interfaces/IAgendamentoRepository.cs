@@ -1,6 +1,6 @@
 ﻿using ModelosConsultaMedica.Models;
 
-namespace ProConsulta.Repositories.Agendamentos
+namespace ModelosConsultaMedica.Interfaces
 {
     public interface IAgendamentoRepository
     {
