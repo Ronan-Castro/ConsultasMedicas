@@ -1,12 +1,13 @@
 ﻿@inherits Microsoft.AspNetCore.Components.ComponentBase
 
-<MudFab Size="@Size" StartIcon="@Icon" @onclick="HandleEditClick" Color="MudBlazor.Color.Secondary" />
+<MudFab Size="@Size" StartIcon="@Icon" @onclick="HandleEditClick" Color="MudBlazor.Color.Secondary" hidden="@Hidden"/>
 
 @code {
     [Parameter] public EventCallback OnEditClick { get; set; }
     [Parameter] public string? NavigationPath { get; set; }
     [Parameter] public Size Size { get; set; } = Size.Small;
     [Parameter] public string Icon { get; set; } = @Icons.Material.Filled.Edit;
+    [Parameter] public bool Hidden { get; set; } = false;
 
     private async Task HandleEditClick()
     {

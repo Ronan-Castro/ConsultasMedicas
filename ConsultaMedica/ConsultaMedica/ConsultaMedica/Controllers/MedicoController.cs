@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ConsultaMedica.Repositories.Medicos;
+using Microsoft.AspNetCore.Mvc;
 using ModelosConsultaMedica.Interfaces;
 using ModelosConsultaMedica.Models;
 
@@ -6,28 +7,28 @@ namespace ConsultaMedica.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PacienteController : ControllerBase
+public class MedicoController : ControllerBase
 {
-    private readonly IPacienteRepository _pacienteRepository;
+    private readonly IMedicoRepository _medicoRepository;
 
-    public PacienteController(IPacienteRepository pacienteRepository)
+    public MedicoController(IMedicoRepository medicoRepository)
     {
-        _pacienteRepository = pacienteRepository;
+        _medicoRepository = medicoRepository;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Paciente>>> GetPacientes()
+    public async Task<ActionResult<IEnumerable<Medico>>> GetMedicos()
     {
         try
         {
-            var pacientes = await _pacienteRepository.GetAllAsync();
-            if (pacientes is null)
+            var medicos = await _medicoRepository.GetAllAsync();
+            if (medicos is null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(pacientes);
+                return Ok(medicos);
             }
         }
         catch (Exception)
@@ -38,18 +39,18 @@ public class PacienteController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<Paciente>> GetPaciente(int id)
+    public async Task<ActionResult<Medico>> GetMedico(int id)
     {
         try
         {
-            var paciente = await _pacienteRepository.GetByIdAsync(id);
-            if (paciente is null)
+            var medico = await _medicoRepository.GetByIdAsync(id);
+            if (medico is null)
             {
-                return NotFound("Paciente não localizado");
+                return NotFound("Medico não localizado");
             }
             else
             {
-                return Ok(paciente);
+                return Ok(medico);
             }
         }
         catch (Exception)
@@ -60,13 +61,13 @@ public class PacienteController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<IEnumerable<Paciente>>> AddPaciente(
-        Paciente paciente
+    public async Task<ActionResult<IEnumerable<Medico>>> AddMedico(
+        Medico medico
     )
     {
         try
         {
-            await _pacienteRepository.AddAsync(paciente);
+            await _medicoRepository.AddAsync(medico);
                 return Ok();            
         }
         catch (Exception)
@@ -77,13 +78,13 @@ public class PacienteController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<ActionResult<IEnumerable<Paciente>>> UpdatePaciente(
-        Paciente paciente
+    public async Task<ActionResult<IEnumerable<Medico>>> UpdateMedico(
+        Medico medico
     )
     {
         try
         {
-            await _pacienteRepository.UpdateAsync(paciente);
+            await _medicoRepository.UpdateAsync(medico);
             return Ok();
         }
         catch (Exception)
@@ -94,11 +95,11 @@ public class PacienteController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult<IEnumerable<Paciente>>> DeletePaciente(int id)
+    public async Task<ActionResult<IEnumerable<Medico>>> DeleteMedico(int id)
     {
         try
         {
-            await _pacienteRepository.DeleteByIdAsync(id);
+            await _medicoRepository.DeleteByIdAsync(id);
             return Ok();
         }
         catch (Exception)

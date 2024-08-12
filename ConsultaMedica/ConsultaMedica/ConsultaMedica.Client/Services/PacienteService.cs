@@ -22,24 +22,24 @@ public class PacienteService : IPacienteRepository
 
     public async Task DeleteByIdAsync(int id)
     {
-        var grupo = await httpClient
-            .DeleteAsync($"api/Paciente/Delete-Paciente/{id}");
-        await grupo.Content.ReadFromJsonAsync<Paciente>();
+        var paciente = await httpClient
+            .DeleteAsync($"api/Paciente/DeletePaciente/{id}");
+        await paciente.Content.ReadFromJsonAsync<Paciente>();
     }
 
     public async Task<List<Paciente>> GetAllAsync()
     {
-        var grupos = await httpClient
+        var pacientes = await httpClient
             .GetAsync("api/Paciente/Pacientes");
-        var response = await grupos.Content.ReadFromJsonAsync<List<Paciente>>();
+        var response = await pacientes.Content.ReadFromJsonAsync<List<Paciente>>();
         return response!;
     }
 
     public async Task<Paciente> GetByIdAsync(int id)
     {
-        var grupo = await httpClient
+        var paciente = await httpClient
             .GetAsync($"api/Paciente/Paciente/{id}");
-        var response = await grupo.Content.ReadFromJsonAsync<Paciente>();
+        var response = await paciente.Content.ReadFromJsonAsync<Paciente>();
         return response!;
     }
 
@@ -52,8 +52,8 @@ public class PacienteService : IPacienteRepository
 
     async Task IPacienteRepository.UpdateAsync(Paciente paciente)
     {
-        var grupo = await httpClient
-            .PutAsJsonAsync("api/Paciente/Update-Paciente", paciente);
-        await grupo.Content.ReadFromJsonAsync<Paciente>();
+        var retorno = await httpClient
+            .PutAsJsonAsync("api/Paciente/UpdatePaciente", paciente);
+        await retorno.Content.ReadFromJsonAsync<Paciente>();
     }
 }

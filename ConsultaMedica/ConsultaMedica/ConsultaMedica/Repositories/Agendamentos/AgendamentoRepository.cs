@@ -19,6 +19,21 @@ namespace ProConsulta.Repositories.Agendamentos
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateAsync(Agendamento agendamento)
+        {
+            try
+            {
+                _context.Update(agendamento);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                _context.ChangeTracker.Clear();
+                throw;
+            }
+
+        }
+
         public async Task DeleteByIdAsync(int id)
         {
             var agendamento = await GetByIdAsync(id);

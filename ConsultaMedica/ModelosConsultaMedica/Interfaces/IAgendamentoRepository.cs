@@ -6,6 +6,7 @@ namespace ModelosConsultaMedica.Interfaces
     {
         Task<List<Agendamento>> GetAllAsync();
         Task AddAsync(Agendamento agendamento);
+        Task UpdateAsync(Agendamento agendamento);
         Task DeleteByIdAsync(int id);
         Task<Agendamento?> GetByIdAsync(int id);
         Task<List<AgendamentosAnuais>?> GetReportAsync();

@@ -12,8 +12,8 @@
         <TemplateColumn>
             <CellTemplate>
                 <MudStack Row>
-                    <ButtonEditGeneric OnEditClick="@(()=>GoUpdate(context.Item.Id))"/>
-                    <ButtonDeleteGeneric ConfirmationMessage="Deseja Remover o Paciente?<br>Esta ação não tem volta!" Title="Remover Paciente" OnConfirmation="@(()=>GoUpdate(context.Item.Id))" />
+                    <ButtonEditGeneric OnEditClick="@(()=>GoUpdate(context.Item.Id))" Hidden="@HideButtons" />
+                    <ButtonDeleteGeneric ConfirmationMessage="Deseja Remover o Paciente?<br>Esta ação não tem volta!" Title="Remover Paciente" OnConfirmation="@(()=>Delete(context.Item))" Hidden="@HideButtons" />
                 </MudStack>
             </CellTemplate>
         </TemplateColumn>
@@ -21,14 +21,35 @@
 </MudDataGrid>
 @code {
     private List<Paciente> Pacientes { get; set; } = new List<Paciente>();
+    public bool HideButtons { get; set; }
+
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var auth = await AuthenticationState;
+
+        HideButtons = !auth.User.IsInRole("Atendente");
+
+        Pacientes = await repository.GetAllAsync();
+    }
 
     public void GoUpdate(int id)
     {
-
+        NavigationManager.NavigateTo($"/pacientes/editar/{id}");
     }
 
-    public void Delete(int id)
+    public async void Delete(Paciente paciente)
     {
-
+        try
+        {
+            await repository.DeleteByIdAsync(paciente.Id);
+            Snackbar.Add($"Paciente {paciente.Nome} excluído com sucesso!", Severity.Success);
+            await OnInitializedAsync();
+        }catch(Exception ex)
+        {
+            Snackbar.Add(ex.Message, Severity.Error);
+        }
     }
 }

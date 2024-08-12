@@ -1,6 +1,6 @@
 ﻿@inherits Microsoft.AspNetCore.Components.ComponentBase
 
-<MudButton Size="@Size" StartIcon="@Icon" Color="MudBlazor.Color.Error" OnClick="ShowConfirmationDialog"/>
+<MudButton Size="@Size" StartIcon="@Icon" Color="MudBlazor.Color.Error" OnClick="ShowConfirmationDialog" hidden="@Hidden" />
 
 @code {
     [Parameter] public EventCallback<int> OnConfirmation { get; set; }
@@ -9,6 +9,7 @@
     [Parameter] public string mensagemSnackBar { get; set; } = "Operação Cancelada";
     [Parameter] public Size Size { get; set; } = Size.Small;
     [Parameter] public string Icon { get; set; } = @Icons.Material.Filled.Delete;
+    [Parameter] public bool Hidden { get; set; } = false;
 
     private async Task ShowConfirmationDialog()
     {

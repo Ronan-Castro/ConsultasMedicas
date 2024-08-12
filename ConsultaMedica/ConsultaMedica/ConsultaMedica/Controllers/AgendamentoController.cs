@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ConsultaMedica.Repositories.Agendamentos;
+using Microsoft.AspNetCore.Mvc;
 using ModelosConsultaMedica.Interfaces;
 using ModelosConsultaMedica.Models;
 
@@ -6,28 +7,28 @@ namespace ConsultaMedica.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PacienteController : ControllerBase
+public class AgendamentoController : ControllerBase
 {
-    private readonly IPacienteRepository _pacienteRepository;
+    private readonly IAgendamentoRepository _agendamentoRepository;
 
-    public PacienteController(IPacienteRepository pacienteRepository)
+    public AgendamentoController(IAgendamentoRepository agendamentoRepository)
     {
-        _pacienteRepository = pacienteRepository;
+        _agendamentoRepository = agendamentoRepository;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Paciente>>> GetPacientes()
+    public async Task<ActionResult<IEnumerable<Agendamento>>> GetAgendamentos()
     {
         try
         {
-            var pacientes = await _pacienteRepository.GetAllAsync();
-            if (pacientes is null)
+            var agendamentos = await _agendamentoRepository.GetAllAsync();
+            if (agendamentos is null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(pacientes);
+                return Ok(agendamentos);
             }
         }
         catch (Exception)
@@ -38,18 +39,18 @@ public class PacienteController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<Paciente>> GetPaciente(int id)
+    public async Task<ActionResult<Agendamento>> GetAgendamento(int id)
     {
         try
         {
-            var paciente = await _pacienteRepository.GetByIdAsync(id);
-            if (paciente is null)
+            var agendamento = await _agendamentoRepository.GetByIdAsync(id);
+            if (agendamento is null)
             {
-                return NotFound("Paciente não localizado");
+                return NotFound("Agendamento não localizado");
             }
             else
             {
-                return Ok(paciente);
+                return Ok(agendamento);
             }
         }
         catch (Exception)
@@ -60,13 +61,13 @@ public class PacienteController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<IEnumerable<Paciente>>> AddPaciente(
-        Paciente paciente
+    public async Task<ActionResult<IEnumerable<Agendamento>>> AddAgendamento(
+        Agendamento agendamento
     )
     {
         try
         {
-            await _pacienteRepository.AddAsync(paciente);
+            await _agendamentoRepository.AddAsync(agendamento);
                 return Ok();            
         }
         catch (Exception)
@@ -77,13 +78,13 @@ public class PacienteController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<ActionResult<IEnumerable<Paciente>>> UpdatePaciente(
-        Paciente paciente
+    public async Task<ActionResult<IEnumerable<Agendamento>>> UpdateAgendamento(
+        Agendamento agendamento
     )
     {
         try
         {
-            await _pacienteRepository.UpdateAsync(paciente);
+            await _agendamentoRepository.UpdateAsync(agendamento);
             return Ok();
         }
         catch (Exception)
@@ -94,11 +95,11 @@ public class PacienteController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult<IEnumerable<Paciente>>> DeletePaciente(int id)
+    public async Task<ActionResult<IEnumerable<Agendamento>>> DeleteAgendamento(int id)
     {
         try
         {
-            await _pacienteRepository.DeleteByIdAsync(id);
+            await _agendamentoRepository.DeleteByIdAsync(id);
             return Ok();
         }
         catch (Exception)
