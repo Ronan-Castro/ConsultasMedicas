@@ -1,15 +1,16 @@
-using ModelosConsultaMedica.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ConsultaMedica.Models;
 using System.Reflection;
 
 namespace ConsultaMedica.Data
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : IdentityDbContext<ApplicationUser>(options)
     {
-        public DbSet<Paciente> Pacientes { get; set; }
-        public DbSet<Medico> Medicos { get; set; }
         public DbSet<Especialidade> Especialidades { get; set; }
+        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

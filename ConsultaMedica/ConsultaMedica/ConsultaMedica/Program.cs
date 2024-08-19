@@ -1,35 +1,32 @@
-using ConsultaMedica.Client.Pages;
-using ConsultaMedica.Components;
-using ConsultaMedica.Components.Account;
-using ConsultaMedica.Data;
-using ConsultaMedica.Repositories.Pacientes;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ModelosConsultaMedica.Interfaces;
 using MudBlazor.Services;
+using ConsultaMedica.Components;
+using ConsultaMedica.Components.Account;
+using ConsultaMedica.Data;
+using ConsultaMedica.Repositories.Agendamentos;
+using ConsultaMedica.Repositories.Especialidades;
+using ConsultaMedica.Repositories.Medicos;
+using ConsultaMedica.Repositories.Pacientes;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-
-// Add MudBlazor services
-builder.Services.AddMudServices();
-
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
-    .AddInteractiveWebAssemblyComponents();
+    .AddInteractiveServerComponents();
+
+builder.Services.AddMudServices();
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
-builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
-
+builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
+builder.Services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
+builder.Services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -41,6 +38,7 @@ builder.Services.AddAuthentication(options =>
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>()
@@ -54,19 +52,9 @@ builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSe
 
 var app = builder.Build();
 
-/*
-using (var scope = app.Services.CreateScope())
-{
-    var dbcontext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    dbcontext.Database.EnsureCreated();
-}
-*/
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseWebAssemblyDebugging();
     app.UseMigrationsEndPoint();
 }
 else
@@ -82,13 +70,9 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode()
-    .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(ConsultaMedica.Client._Imports).Assembly);
+    .AddInteractiveServerRenderMode();
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
-
-app.MapControllers();
 
 app.Run();

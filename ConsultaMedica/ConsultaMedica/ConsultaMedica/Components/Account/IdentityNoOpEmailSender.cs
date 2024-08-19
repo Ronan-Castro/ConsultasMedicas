@@ -1,6 +1,6 @@
-using ConsultaMedica.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using ConsultaMedica.Data;
 
 namespace ConsultaMedica.Components.Account
 {

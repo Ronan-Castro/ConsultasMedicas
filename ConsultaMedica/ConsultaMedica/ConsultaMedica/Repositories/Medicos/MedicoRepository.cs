@@ -1,9 +1,8 @@
-﻿using ConsultaMedica.Data;
-using ModelosConsultaMedica.Models;
-using Microsoft.EntityFrameworkCore;
-using ModelosConsultaMedica.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ConsultaMedica.Data;
+using ConsultaMedica.Models;
 
-namespace ProConsulta.Repositories.Medicos
+namespace ConsultaMedica.Repositories.Medicos
 {
     public class MedicoRepository : IMedicoRepository
     {

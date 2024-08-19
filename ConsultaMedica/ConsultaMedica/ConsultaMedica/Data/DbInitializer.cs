@@ -1,6 +1,6 @@
-﻿using ModelosConsultaMedica.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ConsultaMedica.Models;
 
 namespace ConsultaMedica.Data
 {
@@ -15,7 +15,6 @@ namespace ConsultaMedica.Data
 
         internal void seed()
         {
-            //criando roles
             _modelBuilder.Entity<IdentityRole>().HasData
             (
                 new IdentityRole
@@ -31,23 +30,24 @@ namespace ConsultaMedica.Data
                     NormalizedName = "MEDICO"
                 }
             );
+
             var hasher = new PasswordHasher<IdentityUser>();
+
             _modelBuilder.Entity<Atendente>().HasData
             (
                 new Atendente
                 {
                     Id = "95433ac4-2fe9-468f-b80d-b05ec3724d1d",
                     Nome = "Pro Consulta",
-                    Email = "proconsulta@hotmail.com.br",
+                    Email = "ConsultaMedica@hotmail.com.br",
                     EmailConfirmed = true,
-                    UserName = "proconsulta@hotmail.com.br",
-                    NormalizedEmail = "PROCONSULTA@HOTMAIL.COM.BR",
-                    NormalizedUserName = "PROCONSULTA@HOTMAIL.COM.BR",
+                    UserName = "ConsultaMedica@hotmail.com.br",
+                    NormalizedEmail = "ConsultaMedica@HOTMAIL.COM.BR",
+                    NormalizedUserName = "ConsultaMedica@HOTMAIL.COM.BR",
                     PasswordHash = hasher.HashPassword(null, "Pa$$w0rd")
                 }
             );
 
-            //atribuindo role de atendente para a atendente acima
             _modelBuilder.Entity<IdentityUserRole<string>>().HasData
             (
                 new IdentityUserRole<string>

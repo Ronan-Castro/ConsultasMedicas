@@ -1,9 +1,8 @@
-﻿using ConsultaMedica.Data;
-using ModelosConsultaMedica.Models;
-using Microsoft.EntityFrameworkCore;
-using ModelosConsultaMedica.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ConsultaMedica.Data;
+using ConsultaMedica.Models;
 
-namespace ProConsulta.Repositories.Especialidades
+namespace ConsultaMedica.Repositories.Especialidades
 {
     public class EspecialidadeRepository : IEspecialidadeRepository
     {

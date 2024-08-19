@@ -1,6 +1,6 @@
 ﻿@page "/pacientes/criar"
 @using ConsultaMedica.Client.Extensions
-@inject IPacienteRepository repository
+@inject IGenerico<Paciente> _repository
 
 <MudText Typo="Typo.h3">Cadastro de Pacientes</MudText>
 
@@ -60,7 +60,7 @@
                         DataNascimento = DataNascimento.Value
                     };
 
-                await repository.AddAsync(paciente);
+                await _repository.AddAsync(paciente);
                 Snackbar.Add("Paciente cadastrado com sucesso!", Severity.Success);
                 NavigationManager.NavigateTo("/pacientes");
             }

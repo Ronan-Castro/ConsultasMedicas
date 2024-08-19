@@ -1,7 +1,6 @@
-﻿using ConsultaMedica.Data;
-using ModelosConsultaMedica.Models;
-using Microsoft.EntityFrameworkCore;
-using ModelosConsultaMedica.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ConsultaMedica.Data;
+using ConsultaMedica.Models;
 
 namespace ConsultaMedica.Repositories.Pacientes
 {
@@ -9,9 +8,9 @@ namespace ConsultaMedica.Repositories.Pacientes
     {
         private readonly ApplicationDbContext _context;
 
-        public PacienteRepository(ApplicationDbContext context) 
+        public PacienteRepository(ApplicationDbContext context)
         {
-            _context = context;        
+            _context = context;
         }
 
         public async Task AddAsync(Paciente paciente)
@@ -35,9 +34,11 @@ namespace ConsultaMedica.Repositories.Pacientes
                 .ToListAsync();
         }
 
-        public async Task<Paciente> GetByIdAsync(int id)
+        public async Task<Paciente?> GetByIdAsync(int id)
         {
-            return await _context.Pacientes.FirstAsync(x=>x.Id == id);
+            return await _context
+                .Pacientes
+                .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task UpdateAsync(Paciente paciente)

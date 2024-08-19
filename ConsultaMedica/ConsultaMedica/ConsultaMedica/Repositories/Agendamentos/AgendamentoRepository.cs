@@ -1,8 +1,8 @@
-﻿using ConsultaMedica.Data;
-using ModelosConsultaMedica.Models;
-using Microsoft.EntityFrameworkCore;
-using ModelosConsultaMedica.Interfaces;
-namespace ProConsulta.Repositories.Agendamentos
+﻿using Microsoft.EntityFrameworkCore;
+using ConsultaMedica.Data;
+using ConsultaMedica.Models;
+
+namespace ConsultaMedica.Repositories.Agendamentos
 {
     public class AgendamentoRepository : IAgendamentoRepository
     {
@@ -17,21 +17,6 @@ namespace ProConsulta.Repositories.Agendamentos
         {
             _context.Agendamentos.Add(agendamento);
             await _context.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(Agendamento agendamento)
-        {
-            try
-            {
-                _context.Update(agendamento);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                _context.ChangeTracker.Clear();
-                throw;
-            }
-
         }
 
         public async Task DeleteByIdAsync(int id)
